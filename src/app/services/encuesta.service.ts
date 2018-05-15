@@ -10,7 +10,8 @@ import { map } from 'rxjs/operators';
 })
 
 export class EncuestaService {
-  apiUrl: 'https://servicio-encuesta.herokuapp.com/encuesta';
+  apiUrl ='https://servicio-encuesta.herokuapp.com/encuesta';
+  // apiUrl= 'http://localhost:3000/encuesta';
   constructor(private http: HttpClient) { }
 
   getCat(name: string): Observable<Encuesta> {
@@ -18,7 +19,8 @@ export class EncuestaService {
   }
 
   insertCat(cat: Encuesta): Observable<Encuesta> {
-    return this.http.post<Encuesta>(this.apiUrl, cat);
+    console.log( this.apiUrl);
+    return this.http.post<Encuesta>(this.apiUrl, JSON.stringify(cat));
   }
 
   updateCat(cat: Encuesta): Observable<void> {

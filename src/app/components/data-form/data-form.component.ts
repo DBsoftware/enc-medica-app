@@ -58,7 +58,12 @@ export class DataFormComponent implements OnInit {
   submitForm() {
     this.formValue = this.forma.value;
     this.formValue['cedula'] = this.loginAux.cedula;
-    this.encuesta.insertCat(this.formValue);
+    this.encuesta.insertCat(this.formValue).subscribe(data => {
+      console.log(data);
+    },
+    err => {
+      console.log('Error occured: '  + err);
+    });
   }
 
 
