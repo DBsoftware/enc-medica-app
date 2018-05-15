@@ -1,5 +1,13 @@
-<div class="py-5">
+<div class="py-5 mt-5">
     <div class="container">
+        <div class="row mb-5">
+            <div class="col-md-12 text-center">
+                <hr>
+                <h2 *ngIf="loginAux.ind">Haz ingresado con la cedula: {{loginAux.cedula}}</h2>
+                <h3 *ngIf="!loginAux.ind">Por favor ingresa al sistema para poder enviar la encuesta</h3>
+                <hr>
+            </div>
+        </div>
         <div class="row">
             <div class="col-md-12" *ngIf="this.enunciados">
                 <form [formGroup]="forma" (ngSubmit)="submitForm()">
@@ -26,8 +34,8 @@
                             </div>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-outline-primary btn-lg btn-block" *ngIf="loginAux">Submit</button>
-                    <button type="button" (click)="openModal()" class="btn btn-outline-secondary btn-lg btn-block" *ngIf="!loginAux">Login</button>
+                    <button type="submit" class="btn btn-outline-primary btn-lg btn-block" *ngIf="loginAux.ind">Submit</button>
+                    <button type="button" (click)="openModal()" class="btn btn-outline-secondary btn-lg btn-block" *ngIf="!loginAux.ind">Login</button>
                 </form>
             </div>
         </div>

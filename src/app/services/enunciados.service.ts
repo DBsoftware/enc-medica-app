@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Enunciados } from '../components/common/enunciados';
+import { Enunciados } from '../interfaces/enunciados';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';

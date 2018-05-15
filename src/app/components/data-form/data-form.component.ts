@@ -1,12 +1,14 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import {FormGroup, FormControl, Validators, FormArray} from '@angular/forms';
 import { EnunciadosService } from '../../services/enunciados.service';
-import { Enunciados, Preguntas } from '../common/enunciados';
+import { Enunciados, Preguntas } from '../../interfaces/enunciados';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { ModalComponent } from '../modal/modal.component';
 import { LoginService } from '../../services/login.service';
-
+import { LoginData } from '../../interfaces/login-data';
+import { Encuesta } from '../../interfaces/encuesta';
+import { EncuestaService } from '../../services/encuesta.service';
 
 @Component({
   selector: 'app-data-form',
@@ -19,10 +21,12 @@ export class DataFormComponent implements OnInit {
     inputPreguntas: FormControl[] = [];
     auxArray: any [] = [];
     bsModalRef: BsModalRef;
-    loginAux: boolean;
+    loginAux: LoginData;
+    formValue: Encuesta;
   constructor(private _enunciadoService: EnunciadosService,
               private modalService: BsModalService,
-              private loginService: LoginService
+              private loginService: LoginService,
+              private encuesta: EncuestaService
           ) {
      _enunciadoService.getEnunciados().subscribe(data => {
        this.enunciados = data;
@@ -33,7 +37,7 @@ export class DataFormComponent implements OnInit {
 
   }
  createFormOjb = () => {
-    let formObj = {};
+    const formObj = {};
     for (let i = 0; i < this.enunciados.length; i++) {
       formObj['s' + (i + 1)] = new FormArray(this.auxArray[i]);
     }
@@ -52,7 +56,9 @@ export class DataFormComponent implements OnInit {
 
 
   submitForm() {
-    console.log(this.forma.value);
+    this.formValue = this.forma.value;
+    this.formValue['cedula'] = this.loginAux.cedula;
+    this.encuesta.insertCat(this.formValue);
   }
 
 

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
-import { Encuesta } from '../components/common/encuesta';
+import { Encuesta } from '../interfaces/encuesta';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
