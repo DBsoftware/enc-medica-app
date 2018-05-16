@@ -10,5 +10,5 @@ import { map } from 'rxjs/operators';
 export class EnunciadosService {
   constructor(private http: HttpClient) {}
 
-  getEnunciados = (): Observable<any> => this.http.get('http://localhost:4200/assets/data/preguntas.json');
+  getEnunciados = (): Observable<any> => this.http.get('https://enc-medica-app.herokuapp.com/assets/data/preguntas.json');
 }
