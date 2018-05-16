@@ -18,6 +18,8 @@ export class ModalComponent implements OnInit {
   closeBtnName: string;
   list: any[] = [];
   loginAux: LoginData;
+  case: string;
+
   constructor(public bsModalRef: BsModalRef,
               private loginService: LoginService) {}
 

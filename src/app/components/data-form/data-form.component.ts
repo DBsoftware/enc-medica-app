@@ -56,14 +56,34 @@ export class DataFormComponent implements OnInit {
 
 
   submitForm() {
+    let initialState:{};
+    if (this.forma.valid) {
     this.formValue = this.forma.value;
     this.formValue['cedula'] = this.loginAux.cedula;
     this.encuesta.insertCat(this.formValue).subscribe(data => {
       console.log(data);
+      initialState = {
+        list: [],
+        title: 'Login',
+        case: 'success'
+      };
+      this.bsModalRef = this.modalService.show(ModalComponent, {initialState});
+      this.bsModalRef.content.closeBtnName = 'Close';
     },
     err => {
-      console.log('Error occured: '  + err);
+      initialState = {
+        list: [],
+        title: 'Login',
+        case: 'fail'
+      };
+      this.bsModalRef = this.modalService.show(ModalComponent, {initialState});
+      this.bsModalRef.content.closeBtnName = 'Close';
+      console.log('Error occured: '  + err.message);
     });
+
+  } else {
+    console.log('los campos son requeridos');
+  }
   }
 
 
@@ -74,7 +94,8 @@ export class DataFormComponent implements OnInit {
   openModal = () => {
     const initialState = {
       list: [],
-      title: 'Login'
+      title: 'Login',
+      case: 'login'
     };
     this.bsModalRef = this.modalService.show(ModalComponent, {initialState});
     this.bsModalRef.content.closeBtnName = 'Close';

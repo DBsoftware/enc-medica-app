@@ -21,7 +21,8 @@ export class HeaderComponent implements OnInit {
   openModal = () => {
     const initialState = {
       list: [],
-      title: 'Login'
+      title: 'Login',
+      case: 'login'
     };
     this.bsModalRef = this.modalService.show(ModalComponent, {initialState});
     this.bsModalRef.content.closeBtnName = 'Close';
