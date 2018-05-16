@@ -11,6 +11,7 @@ import { ModalComponent } from './components/modal/modal.component';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { ComponentLoaderFactory } from 'ngx-bootstrap/component-loader';
+import { CollapseModule } from 'ngx-bootstrap/collapse';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { ComponentLoaderFactory } from 'ngx-bootstrap/component-loader';
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    CollapseModule
   ],
   providers: [
     BsModalService,

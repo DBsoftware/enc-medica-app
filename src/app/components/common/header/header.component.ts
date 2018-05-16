@@ -10,6 +10,7 @@ import { ModalComponent } from '../../modal/modal.component';
   templateUrl: './header.component.html'
 })
 export class HeaderComponent implements OnInit {
+  isCollapsed = true;
   loginAux: LoginData;
   bsModalRef: BsModalRef;
   constructor(private loginService: LoginService, private modalService: BsModalService) { }
