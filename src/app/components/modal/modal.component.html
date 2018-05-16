@@ -1,18 +1,20 @@
-<div class="modal-header">
+<div class="modal-header" [ngClass]="{'text-success':title === 'Success',
+'text-primary':title === 'Login',
+'text-danger':title === 'Fail' }">
     <h4 class="modal-title pull-left">{{title}}</h4>
     <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
     <span aria-hidden="true">&times;</span>
   </button>
 </div>
 <div class="modal-body">
-    <div [ngSwitch]="case">
-        <div *ngSwitchCase="'success'">
+    <div [ngSwitch]="title">
+        <div *ngSwitchCase="'Success'">
             <h1>El registro fue creado exitosamente</h1>
         </div>
-        <div *ngSwitchCase="'fail'">
+        <div *ngSwitchCase="'Fail'">
             <h1>Ha habido un problema</h1>
         </div>
-        <div *ngSwitchCase="'login'">
+        <div *ngSwitchCase="'Login'">
             <form class="" (ngSubmit)="guardar(forma)" #forma="ngForm">
                 <div class="form-group" [ngClass]="{'has-danger': user.errors?.required  && user.touched }">
                     <label>Cedula*</label>

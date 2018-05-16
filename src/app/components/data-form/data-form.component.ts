@@ -73,8 +73,7 @@ export class DataFormComponent implements OnInit {
       this.submitState = 'Submit';
       initialState = {
         list: [],
-        title: 'Login',
-        case: 'success'
+        title: 'Success'
       };
       this.bsModalRef = this.modalService.show(ModalComponent, {initialState});
       this.bsModalRef.content.closeBtnName = 'Close';
@@ -82,12 +81,11 @@ export class DataFormComponent implements OnInit {
     err => {
       initialState = {
         list: [],
-        title: 'Login',
-        case: 'fail'
+        title: 'Fail'
       };
       this.bsModalRef = this.modalService.show(ModalComponent, {initialState});
       this.bsModalRef.content.closeBtnName = 'Close';
-      console.log('Error occured: '  + err.message);
+      console.log(`Error occured: ${err.message}`);
     });
 
   } else {
@@ -103,8 +101,7 @@ export class DataFormComponent implements OnInit {
   openModal = () => {
     const initialState = {
       list: [],
-      title: 'Login',
-      case: 'login'
+      title: 'Login'
     };
     this.bsModalRef = this.modalService.show(ModalComponent, {initialState});
     this.bsModalRef.content.closeBtnName = 'Close';

@@ -24,8 +24,8 @@ export class ModalComponent implements OnInit {
               private loginService: LoginService) {}
 
   users: any[] = [
-    {user: "12345",
-    pass: "12345"}
+    {user: '12345',
+    pass: '12345'}
   ];
 
   ngOnInit() {
