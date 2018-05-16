@@ -30,6 +30,7 @@ export class HeaderComponent implements OnInit {
 
   closeSession() {
     this.loginService.changeMessage({ind: false, cedula: ''});
+    localStorage.removeItem('ced');
   }
 
 }

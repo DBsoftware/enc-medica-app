@@ -6,7 +6,7 @@ import { LoginData } from '../interfaces/login-data';
   providedIn: 'root'
 })
 export class LoginService {
-  private messageSource = new BehaviorSubject<LoginData>({ind: false, cedula: '000'});
+  private messageSource = new BehaviorSubject<LoginData>({ind: false, cedula: ''});
   currentMessage = this.messageSource.asObservable();
 
   constructor() { }

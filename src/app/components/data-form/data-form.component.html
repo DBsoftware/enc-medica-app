@@ -3,8 +3,9 @@
         <div class="row mb-5">
             <div class="col-md-12 text-center">
                 <hr>
-                <h2 *ngIf="loginAux.ind">Haz ingresado con la cedula: {{loginAux.cedula}}</h2>
-                <h3 *ngIf="!loginAux.ind">Por favor ingresa al sistema para poder enviar la encuesta</h3>
+                <h2 *ngIf="loginAux.ind" style="color: rgb(126, 248, 126);">Haz ingresado con la cedula: {{loginAux.cedula}}</h2>
+                <h3 *ngIf="!loginAux.ind" style="color: rgb(247, 140, 140)">Por favor ingresa al sistema para poder enviar la encuesta</h3>
+                <button type="button" (click)="openModal()" class="btn btn-outline-secondary btn-md " *ngIf="!loginAux.ind">Login</button>
                 <hr>
             </div>
         </div>
@@ -34,7 +35,7 @@
                             </div>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-outline-primary btn-lg btn-block" *ngIf="loginAux.ind">Submit</button>
+                    <button type="submit" class="btn btn-outline-primary btn-lg btn-block" *ngIf="loginAux.ind" [disabled]="submitState=='En proceso'">{{submitState}}</button>
                     <button type="button" (click)="openModal()" class="btn btn-outline-secondary btn-lg btn-block" *ngIf="!loginAux.ind">Login</button>
                 </form>
             </div>

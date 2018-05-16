@@ -36,6 +36,7 @@ export class ModalComponent implements OnInit {
   guardar = (f) => {
     if (this.users.findIndex(x => x.user === f.value.user) !== -1 ) {
       this.loginService.changeMessage({ind: true, cedula: f.value.user});
+      localStorage.setItem('ced', f.value.user);
       this.bsModalRef.hide();
     }
   }

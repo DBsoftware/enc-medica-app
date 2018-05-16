@@ -23,11 +23,13 @@ export class DataFormComponent implements OnInit {
     bsModalRef: BsModalRef;
     loginAux: LoginData;
     formValue: Encuesta;
+    submitState = 'Submit';
   constructor(private _enunciadoService: EnunciadosService,
               private modalService: BsModalService,
               private loginService: LoginService,
               private encuesta: EncuestaService
           ) {
+      this.verifySession();
      _enunciadoService.getEnunciados().subscribe(data => {
        this.enunciados = data;
        this.organizeRadioObjects();
@@ -35,6 +37,12 @@ export class DataFormComponent implements OnInit {
        this.forma = new FormGroup(this.createFormOjb());
      });
 
+  }
+
+  verifySession = () => {
+    if (localStorage.getItem('ced')) {
+      this.loginService.changeMessage({ind: true, cedula: localStorage.getItem('ced')});
+    }
   }
  createFormOjb = () => {
     const formObj = {};
@@ -47,7 +55,7 @@ export class DataFormComponent implements OnInit {
   organizeRadioObjects = () => {
     for (let i = 0; i < this.enunciados.length; i++) {
       for (let j = 0; j < this.enunciados[i].preguntas.length ; j++) {
-        this.inputPreguntas.push(new FormControl( '' , Validators.required));
+        this.inputPreguntas.push(new FormControl( 'si' , Validators.required));
       }
       this.auxArray.push(this.inputPreguntas);
       this.inputPreguntas = [];
@@ -56,12 +64,13 @@ export class DataFormComponent implements OnInit {
 
 
   submitForm() {
-    let initialState:{};
-    if (this.forma.valid) {
+    let initialState: {};
+    if (this.forma.valid && this.loginAux.cedula !== '') {
     this.formValue = this.forma.value;
     this.formValue['cedula'] = this.loginAux.cedula;
+    this.submitState = 'En proceso';
     this.encuesta.insertCat(this.formValue).subscribe(data => {
-      console.log(data);
+      this.submitState = 'Submit';
       initialState = {
         list: [],
         title: 'Login',
