@@ -42,7 +42,7 @@ export class ModalComponent implements OnInit {
       this.case = true;
       setTimeout(() => {
         this.case = false;
-      }, 2000);
+      }, 3000);
     }
 
 
