@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
-import { Encuesta } from '../interfaces/encuesta';
+import { Encuesta } from '../interfaces/interfaces';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { environment } from '../../environments/environment';
 
 
 @Injectable({
@@ -10,7 +10,7 @@ import { map } from 'rxjs/operators';
 })
 
 export class EncuestaService {
-  apiUrl = 'https://servicio-encuesta.herokuapp.com/encuesta';
+  apiUrl = environment.serviceURI;
   constructor(private http: HttpClient) { }
 
   getCat(name: string): Observable<Encuesta> {

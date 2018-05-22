@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  serviceURI: 'https://servicio-encuesta.herokuapp.com/encuesta'
 };

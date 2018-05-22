@@ -1,10 +1,6 @@
 export interface Enunciados {
 
     seccion: String;
-    preguntas: Preguntas[];
+    preguntas: String[];
 }
 
-export interface Preguntas {
-    pregunta: String;
-    enunciado: String;
-}
