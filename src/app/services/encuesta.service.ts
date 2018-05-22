@@ -18,7 +18,6 @@ export class EncuestaService {
   }
 
   insertCat(cat: Encuesta): Observable<Encuesta> {
-    console.log(JSON.stringify(cat));
     return this.http.post<Encuesta>(this.apiUrl, cat);
   }
 

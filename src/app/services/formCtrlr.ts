@@ -1,15 +1,19 @@
 import {FormGroup, FormControl, Validators, FormArray} from '@angular/forms';
+import { Injectable } from '@angular/core';
 
+@Injectable({
+  providedIn: 'root'
+})
 export class FormCtrlr {
 
   inputPreguntas: FormControl[] = [];
   enunciados: any[];
   auxArray: any [] = [];
-  constructor(params: any[]) {
-        this.enunciados = params;
-    }
 
-    formBuilder(): FormGroup {
+  constructor() {}
+
+    formBuilder(params: any[]): FormGroup {
+        this.enunciados = params;
         this.organizeRadioObjects();
         return new FormGroup(this.createFormOjb());
     }

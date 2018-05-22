@@ -4,9 +4,9 @@ import { Enunciados as iEnunciados, LoginData, Encuesta } from '../../interfaces
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { ModalComponent } from '../modal/modal.component';
-import { LoginService, EncuestaService } from '../../services/services';
-import { FormCtrlr } from '../../utils/formCtrlr';
+import { LoginService, EncuestaService, FormCtrlr } from '../../services/services';
 import { Enunciados } from '../../data/preguntas';
+
 
 @Component({
   selector: 'app-data-form',
@@ -23,11 +23,12 @@ export class DataFormComponent  {
   constructor(
               private modalService: BsModalService,
               private loginService: LoginService,
-              private encuesta: EncuestaService
+              private encuesta: EncuestaService,
+              private formCtr: FormCtrlr
           ) {
        this.verifySession();
        this.enunciados = Enunciados;
-       this.forma = new FormCtrlr(this.enunciados).formBuilder();
+       this.forma = formCtr.formBuilder(this.enunciados);
 
   }
 
@@ -62,6 +63,7 @@ export class DataFormComponent  {
   },
   err => {
     initialState['title'] = 'Fail';
+    this.submitState = 'Submit';
     this.modalInit(initialState);
     console.log(`Error occured: ${err.message}`);
   });
