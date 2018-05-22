@@ -47,7 +47,8 @@ export class DataFormComponent  {
 
   openModal = () => {
     const initialState: {} = {};
-    this.modalInit(initialState['title'] = 'Login');
+    initialState['title'] = 'Login';
+    this.modalInit(initialState);
   }
 
   validSubmit() {
@@ -56,15 +57,17 @@ export class DataFormComponent  {
     this.submitState = 'En proceso';
     this.encuesta.insertCat(this.forma.value).subscribe(data => {
     this.submitState = 'Submit';
-    this.modalInit(initialState['title'] = 'Success');
+    initialState['title'] = 'Success';
+    this.modalInit(initialState);
   },
   err => {
-    this.modalInit(initialState['title'] = 'Fail');
+    initialState['title'] = 'Fail';
+    this.modalInit(initialState);
     console.log(`Error occured: ${err.message}`);
   });
   }
 
-  modalInit(initialState){
+  modalInit(initialState) {
     this.bsModalRef = this.modalService.show(ModalComponent, {initialState});
     this.bsModalRef.content.closeBtnName = 'Close';
   }

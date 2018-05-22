@@ -20,12 +20,9 @@ export class HeaderComponent implements OnInit {
   }
 
   openModal = () => {
-    const initialState = {
-      list: [],
-      title: 'Login'
-    };
-    this.bsModalRef = this.modalService.show(ModalComponent, {initialState});
-    this.bsModalRef.content.closeBtnName = 'Close';
+    const initialState: {} = {};
+    initialState['title'] = 'Login';
+    this.modalInit(initialState);
   }
 
   closeSession() {
@@ -33,4 +30,8 @@ export class HeaderComponent implements OnInit {
     localStorage.removeItem('ced');
   }
 
+  modalInit(initialState) {
+    this.bsModalRef = this.modalService.show(ModalComponent, {initialState});
+    this.bsModalRef.content.closeBtnName = 'Close';
+  }
 }
