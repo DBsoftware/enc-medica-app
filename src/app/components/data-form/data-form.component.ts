@@ -26,13 +26,11 @@ export class DataFormComponent  {
               private formCtr: FormCtrlr,
               private enunciadosService: EnunciadosService
           ) {
-       this.verifySession();
        this.enunciadosService.getVal().subscribe(data => {
         this.enunciados = data;
         this.forma = formCtr.formBuilder(this.enunciados);
+        this.verifySession();
        });
-
-
   }
 
   verifySession = () => {
