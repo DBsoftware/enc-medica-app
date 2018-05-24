@@ -10,7 +10,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-12" *ngIf="this.enunciados">
                 <form [formGroup]="forma" (ngSubmit)="submitForm()">
                     <div class="form-group">
                         <div class="form-group" *ngFor="let enun of this.enunciados; index as i">

@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  serviceURI: 'http://localhost:3000/encuesta'
+  serviceURI: 'http://localhost:3000/'
 };
 
 /*

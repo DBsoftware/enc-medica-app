@@ -4,8 +4,7 @@ import { Enunciados as iEnunciados, LoginData, Encuesta } from '../../interfaces
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { ModalComponent } from '../modal/modal.component';
-import { LoginService, EncuestaService, FormCtrlr } from '../../services/services';
-import { Enunciados } from '../../data/preguntas';
+import { LoginService, EncuestaService, FormCtrlr, EnunciadosService } from '../../services/services';
 
 
 @Component({
@@ -24,11 +23,15 @@ export class DataFormComponent  {
               private modalService: BsModalService,
               private loginService: LoginService,
               private encuesta: EncuestaService,
-              private formCtr: FormCtrlr
+              private formCtr: FormCtrlr,
+              private enunciadosService: EnunciadosService
           ) {
        this.verifySession();
-       this.enunciados = Enunciados;
-       this.forma = formCtr.formBuilder(this.enunciados);
+       this.enunciadosService.getVal().subscribe(data => {
+        this.enunciados = data;
+        this.forma = formCtr.formBuilder(this.enunciados);
+       });
+
 
   }
 

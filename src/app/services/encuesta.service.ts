@@ -10,7 +10,7 @@ import { environment } from '../../environments/environment';
 })
 
 export class EncuestaService {
-  apiUrl = environment.serviceURI;
+  apiUrl = `${environment.serviceURI}encuesta/`;
   constructor(private http: HttpClient) { }
 
   getCat(name: string): Observable<Encuesta> {

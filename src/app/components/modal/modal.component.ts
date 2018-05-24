@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
-import { LoginService } from '../../services/login.service';
-import { LoginData } from '../../interfaces/login-data';
-import { Users } from '../../interfaces/users';
-import { Users as usersData} from '../../data/users';
+import { LoginService, UsuariosService } from '../../services/services';
+import { LoginData, Users } from '../../interfaces/interfaces';
+import { FormGroup } from '@angular/forms';
 @Component({
   selector: 'app-modal',
   templateUrl: './modal.component.html',
@@ -23,9 +22,10 @@ export class ModalComponent implements OnInit {
   case = false;
 
   constructor(public bsModalRef: BsModalRef,
-              private loginService: LoginService) {}
+              private loginService: LoginService,
+              private userService: UsuariosService
+            ) {}
 
-  users: Users[] = usersData;
 
   ngOnInit() {
     this.loginService.currentMessage.subscribe(message => this.loginAux = message);
@@ -33,9 +33,11 @@ export class ModalComponent implements OnInit {
 
 
   guardar = (f) => {
-    (this.users.findIndex(x => x.user === f.value.user) !== -1 ) ?
-      this.validUser(f) :
+    this.userService.getVal(f.value.user).subscribe(data => {
+      this.validUser(data, f.value);
+    }, err => {
       this.elseBehaviour();
+    });
   }
 
     elseBehaviour() {
@@ -46,15 +48,16 @@ export class ModalComponent implements OnInit {
     }
 
 
-    validLogin(f) {
-      this.loginService.changeMessage({ind: true, cedula: f.value.user});
-      localStorage.setItem('ced', f.value.user);
+    validLogin(aux) {
+      this.loginService.changeMessage({ind: true, cedula: aux});
+      localStorage.setItem('ced', aux);
       this.bsModalRef.hide();
     }
 
-    validUser(f) {
-      (this.users[this.users.findIndex(x => x.user === f.value.user)].pass === f.value.pass ) ?
-      this.validLogin(f) :
+    validUser(d: Users, {user, pass}) {
+      (d) ? ((d.pass === pass) ?
+      this.validLogin(user) :
+      this.elseBehaviour()) :
       this.elseBehaviour();
     }
 
