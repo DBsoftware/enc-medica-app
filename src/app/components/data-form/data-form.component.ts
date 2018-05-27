@@ -26,7 +26,8 @@ export class DataFormComponent  {
               private formCtr: FormCtrlr,
               private enunciadosService: EnunciadosService
           ) {
-       this.enunciadosService.getVal().subscribe(data => {
+          this.loginService.currentMessage.subscribe(data => this.loginAux = data);     
+        this.enunciadosService.getVal().subscribe(data => {
         this.enunciados = data;
         this.forma = formCtr.formBuilder(this.enunciados);
         this.verifySession();
@@ -34,7 +35,6 @@ export class DataFormComponent  {
   }
 
   verifySession = () => {
-    this.loginService.currentMessage.subscribe(data => this.loginAux = data);
     if (localStorage.getItem('ced')) {
       this.loginService.changeMessage({ind: true, cedula: localStorage.getItem('ced')});
     }
